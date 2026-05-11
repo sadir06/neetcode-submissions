@@ -1,0 +1,17 @@
+class Solution:
+    def minEatingSpeed(self, piles: List[int], h: int) -> int:
+        l, r = 1, max(piles)
+        result = r
+
+        while l <= r:
+            k = (l + r) // 2 # The "middle" term
+
+            totalTime = 0
+            for p in piles:
+                totalTime += math.ceil(float(p) / k)
+            if totalTime <= h:
+                result = k # This is now the new largest term
+                r = k - 1 # Reduce the right side
+            else:
+                l = k + 1
+        return result
